@@ -11,10 +11,57 @@ class App extends React.Component {
       pets: [],
       filters: {
         type: 'all'
-      }
+      },
+      isAdopted: false
     }
   }
 
+onChangeType = () => {
+  this.setState(prevState => ({
+    ...prevState, filters: {
+      ...prevState.filters, type: 'cat'
+    }
+  }))
+}
+
+onAdoptPet = (event) => {
+ const found = this.state.pets.find(pet => pet.id === event.id)
+ this.setState(prevState => {
+   return {isAdopted: true}
+ })
+}
+
+onFindPetsClick = () => {
+  if (this.state.filters.type === 'all') {
+  fetch("/api/pets")
+  .then(resp => resp.json())
+  .then(data => {
+    this.setState({pets: data})
+  })
+  .catch(err => console.log(err))
+  } else if (this.state.filters.type === 'cat'){
+     fetch("/api/pets?type=cats")
+  .then(resp => resp.json())
+  .then(data => {
+    this.setState({pets: data})
+  })
+  .catch(err => console.log(err))
+  } else if (this.state.filters.type === 'dog') {
+     fetch("/api/pets?type=dog")
+  .then(resp => resp.json())
+  .then(data => {
+    this.setState({pets: data})
+  })
+  .catch(err => console.log(err))
+  } else if (this.state.filters.type === 'micropig'){
+     fetch("/api/pets?type=micropig")
+  .then(resp => resp.json())
+  .then(data => {
+    this.setState({pets: data})
+  })
+  .catch(err => console.log(err))
+  }
+}
   render() {
     return (
       <div className="ui container">
@@ -24,10 +71,10 @@ class App extends React.Component {
         <div className="ui container">
           <div className="ui grid">
             <div className="four wide column">
-              <Filters />
+              <Filters onChangeType={this.onChangeType} data={this.state}/>
             </div>
             <div className="twelve wide column">
-              <PetBrowser />
+              <PetBrowser onFindPetsClick={this.onFindPetsClick} onAdoptPet={event => this.onAdoptPet(event)}/>
             </div>
           </div>
         </div>
