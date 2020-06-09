@@ -26,7 +26,7 @@ class Pet extends React.Component {
           {this.props.pet.isAdopted ? 
             <button className="ui disabled button" style={{color: "red"}}><h1>Already adopted</h1></button> 
           :
-            <button className="ui primary button" onClick={this.props.onAdoptPet} >Adopt pet</button> 
+            <button className="ui primary button" onClick={()=> this.props.onAdoptPet(this.props.petId)} >Adopt pet</button> 
   }
         </div>
       </div>

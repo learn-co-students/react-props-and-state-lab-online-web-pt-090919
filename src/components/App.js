@@ -41,18 +41,19 @@ class App extends React.Component {
           
   }) }  
   
-  onAdoptPet = (event) =>{  
-    debugger 
-    let savedEvent = event
-    let id = savedEvent.target.parentElement.id
-    let adoptedPet = this.state.pets.filter(pet => pet.id === id)
+  onAdoptPet = (petId) =>{  
+    //debugger 
+   // console.log("event", event.target) 
+   // let savedEvent = event
+    //let petId = savedEvent.target.parentElement.id
+    let adoptedPet = this.state.pets.filter(pet => pet.id === petId)
     adoptedPet[0].isAdopted = true;
-    debugger
+   // debugger
     this.setState((previousState) =>{ 
       
-     return { ...previousState.pets = this.state.pets }
+     return { pets: this.state.pets }
     }); 
-    console.log(this.state.pets)
+   
   }
    
   render() { 
