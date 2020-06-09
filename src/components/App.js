@@ -41,7 +41,8 @@ class App extends React.Component {
           
   }) }  
   
-  updateState = (pets) =>{  
+  onAdoptPet = (pets) =>{  
+    debugger 
     let id = pets.target.parentElement.id
     let adoptedPet = this.state.pets.filter(pet => pet.id === id)
     adoptedPet[0].isAdopted = true;
@@ -69,10 +70,7 @@ class App extends React.Component {
             </div>
             <div className="twelve wide column"> 
               
-              <PetBrowser on_AdoptPet={this.state.pets} pets={this.state.pets} onAdoptPet={ (e) =>{
-                debugger 
-                let savedEvent = e
-                this.updateState(savedEvent) }}/>
+              <PetBrowser on_AdoptPet={this.state.pets} pets={this.state.pets} onAdoptPet={(e) => this.onAdoptPet(e) }/>
             </div>
           </div>
         </div>
