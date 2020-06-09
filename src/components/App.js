@@ -42,8 +42,9 @@ class App extends React.Component {
   }) }  
   
   onAdoptPet = (event) =>{  
-    debugger //pets is event data being passed up. it should exist 
-    let id = event.target.parentElement.id
+    debugger 
+    let savedEvent = event
+    let id = savedEvent.target.parentElement.id
     let adoptedPet = this.state.pets.filter(pet => pet.id === id)
     adoptedPet[0].isAdopted = true;
     debugger
