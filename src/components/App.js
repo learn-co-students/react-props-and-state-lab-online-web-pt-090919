@@ -13,9 +13,51 @@ class App extends React.Component {
         type: 'all'
       }
     }
-  }
+  } 
 
-  render() {
+  changeFilter = (e) =>{ 
+
+    e.preventDefault();
+    e.persist();
+    let newStateVal = e.target.value 
+    
+    this.setState((perviousState) =>{ 
+       return Object.assign({}, {...perviousState}, { filters:{ 
+        type: newStateVal }}  )  
+    }); 
+
+    
+  }
+ 
+  
+  fetchPets = () =>{
+        
+        let URL = (this.state.filters.type === 'all' ? '/api/pets' : '/api/pets?type=' + this.state.filters.type) 
+        fetch(URL).then(res => res.json())
+          .then(data => {  
+             this.setState({
+               pets: data
+             })
+          
+  }) }  
+  
+  onAdoptPet = (petId) =>{  
+    //debugger 
+   // console.log("event", event.target) 
+   // let savedEvent = event
+    //let petId = savedEvent.target.parentElement.id
+    let adoptedPet = this.state.pets.filter(pet => pet.id === petId)
+    adoptedPet[0].isAdopted = true;
+   // debugger
+    this.setState((previousState) =>{ 
+      
+     return { pets: this.state.pets }
+    }); 
+   
+  }
+   
+  render() { 
+    
     return (
       <div className="ui container">
         <header>
@@ -24,10 +66,13 @@ class App extends React.Component {
         <div className="ui container">
           <div className="ui grid">
             <div className="four wide column">
-              <Filters />
+              <Filters onChangeType={(e) => this.changeFilter(e)} 
+                onFindPetsClick={this.fetchPets}
+              />
             </div>
-            <div className="twelve wide column">
-              <PetBrowser />
+            <div className="twelve wide column"> 
+              
+              <PetBrowser  pets={this.state.pets} onAdoptPet={this.onAdoptPet }/>
             </div>
           </div>
         </div>
@@ -37,3 +82,5 @@ class App extends React.Component {
 }
 
 export default App
+
+
