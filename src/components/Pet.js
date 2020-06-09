@@ -29,7 +29,7 @@ class Pet extends React.Component {
             <button className="ui primary button" onClick={(e) =>{  
               let savede = e 
               debugger
-              this.props.clicked(savede) 
+              this.props.onAdoptPet(savede) 
             }
             } >Adopt pet</button> 
   }
