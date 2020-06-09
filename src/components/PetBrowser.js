@@ -12,18 +12,18 @@ class PetBrowser extends React.Component {
     
   } 
 
-  adoptME = (event) =>{  
+  // adoptME = (event) =>{  
     
-    event.persist()
-    let petEvent = event
-    let id = petEvent.target.parentElement.id 
-    let adoptedPet = this.props.pets.filter(pet => pet.id === id)
-    adoptedPet[0].isAdopted = true;   
-    debugger
-    this.props.onAdoptPet()(this.props.pets)  
+  //   event.persist()
+  //   let petEvent = event
+  //   let id = petEvent.target.parentElement.id 
+  //   let adoptedPet = this.props.pets.filter(pet => pet.id === id)
+  //   adoptedPet[0].isAdopted = true;   
+  //   debugger
+  //   this.props.onAdoptPet()(this.props.pets)  
     
     
-  }
+  // }
   render() { 
     return <div className="ui cards">{this.makePets()}</div>
   }
